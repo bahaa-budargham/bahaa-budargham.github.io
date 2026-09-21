@@ -3,196 +3,461 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bahaa Budargham – Independent Researcher</title>
+  <title>Engineering of Alphabets (EOA): Symbolic Dynamics &amp; Representation Theory Research</title>
+
+  <meta name="description" content="The Engineering of Alphabets (EOA) research program explores symbolic dynamics, representation theory, and deterministic systems through convergent recursive sequences. EOA-43 is a training-free, rank-collapsed word representation with 16 distinct sequence groups, a 13-dimensional algebraic basis, and encoding-dependent LCR.">
+  <meta name="keywords" content="alphabets, sequence-group collapse, convergence, deterministic systems, dimensionality collapse, EOA program, fractal geometry, machine learning, mathematics, phonetic encoding, rank-1, sequences, recursion, representation theory, symbolic dynamics, 13-dimensional basis, common linear recurrence, algebraic foundation">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://research.neurolabs.space/">
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      font-family: 'Georgia', serif;
-      background-color: #f9f9f9;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #fcfcfc;
       color: #1e1e1e;
-      line-height: 1.6;
-      padding: 2rem 1rem;
-      max-width: 900px;
+      line-height: 1.7;
+      padding: 2rem 1.5rem;
+      max-width: 960px;
       margin: 0 auto;
     }
-    h1 {
-      font-size: 2.4rem;
+
+    .header {
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .header h1 {
+      font-size: 2rem;
       font-weight: 400;
       letter-spacing: -0.5px;
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 0.5rem;
-      margin-bottom: 0.5rem;
     }
-    .subhead {
-      font-size: 1.1rem;
-      color: #444;
-      margin-bottom: 1.5rem;
+
+    .header .tagline {
+      font-size: 1rem;
+      color: #555;
+      margin-top: 0.2rem;
     }
+
+    /* Badges */
     .badges {
-      margin: 0.5rem 0 1.5rem 0;
+      margin: 1rem 0 0.8rem 0;
     }
+
     .badges a {
       display: inline-block;
       margin-right: 0.8rem;
-      padding: 0.3rem 0.8rem;
+      margin-bottom: 0.5rem;
+      padding: 0.3rem 1rem;
       background: #eaeaea;
       border-radius: 20px;
       font-size: 0.85rem;
       text-decoration: none;
       color: #1e1e1e;
     }
+
     .badges a:hover {
       background: #ccc;
     }
+
+    .badges .highlight {
+      background: #1e1e1e;
+      color: #fff;
+    }
+
+    .badges .highlight:hover {
+      background: #333;
+    }
+
+    /* Navigation */
+   
+    
+
+        /* Navigation buttons */
+    .mainnav {
+      margin: 1rem 0 2rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      padding: 0.9rem 1rem;
+      background: #f4f4f4;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+    }
+
+    .mainnav a.navbtn {
+      display: inline-block;
+      padding: 0.55rem 1.1rem;
+      font-size: 0.92rem;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      color: #1e1e1e;
+      background: #fff;
+      border: 1px solid #c8c8c8;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+      transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+    }
+
+    .mainnav a.navbtn:hover {
+      background: #e8e8e8;
+      color: #1e1e1e;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.14);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    .mainnav a.navbtn.current,
+    .mainnav a.navbtn.current:hover {
+      background: #1e1e1e;
+      color: #ffffff;
+      border-color: #1e1e1e;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      font-weight: 600;
+      transform: none;
+      text-decoration: none;
+    }
+
     h2 {
       font-size: 1.6rem;
       font-weight: 400;
-      margin-top: 2rem;
+      margin-top: 2.2rem;
       border-bottom: 1px solid #ddd;
-      padding-bottom: 0.3rem;
+      padding-bottom: 0.4rem;
     }
-    h3 {
-      font-size: 1.2rem;
-      font-weight: 400;
-      margin-top: 1.2rem;
-      color: #222;
+
+    p { margin: 0.8rem 0; }
+
+    ul { list-style: none; padding-left: 0; }
+    ul li { margin-bottom: 0.5rem; padding-left: 1.2rem; text-indent: -1.2rem; }
+    ul li::before { content: "• "; color: #777; }
+
+    a { color: #1a0dab; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .publication {
+      margin-bottom: 1.2rem;
+      padding-left: 1rem;
+      border-left: 3px solid #ccc;
     }
-    ul {
-      list-style: none;
-      padding-left: 0;
+
+    .publication strong { font-weight: 600; }
+
+    .publication .meta {
+      font-size: 0.9rem;
+      color: #555;
     }
-    ul li {
-      margin-bottom: 0.6rem;
-      padding-left: 1.2rem;
-      text-indent: -1.2rem;
+
+    .promise-box {
+      background: #f0f0f0;
+      padding: 1.2rem 1.5rem;
+      border-radius: 8px;
+      margin: 1.2rem 0;
+      border-left: 4px solid #1e1e1e;
     }
-    ul li::before {
-      content: "— ";
-      color: #777;
+
+    .promise-box ul { margin-top: 0.5rem; }
+    .promise-box ul li::before { content: "✓ "; color: #1e1e1e; }
+
+    .figure-box {
+      margin: 1.5rem 0;
+      text-align: center;
     }
-    a {
-      color: #1a0dab;
-      text-decoration: none;
+
+    .figure-box img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: #fff;
     }
-    a:hover {
-      text-decoration: underline;
+
+    .figure-box .caption {
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 0.5rem;
+      font-style: italic;
     }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th { background: #f0f0f0; font-weight: 600; }
+
+    tr.highlight-row td {
+      background: #fff7e0;
+      font-weight: 600;
+    }
+
     .footer {
       margin-top: 2.5rem;
       padding-top: 1rem;
       border-top: 1px solid #ddd;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #666;
+      text-align: center;
     }
-    .publication {
-      margin-bottom: 1rem;
-      padding-left: 0.5rem;
-      border-left: 3px solid #ccc;
-      padding-left: 1rem;
+
+    .footer a { color: #1a0dab; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      table, th, td { font-size: 0.85rem; }
     }
-    .publication strong {
-      font-weight: 600;
-    }
-    .publication .meta {
-      font-size: 0.9rem;
-      color: #555;
+
+    .eoa-parts-table { table-layout: fixed; width: 100%; }
+    .eoa-parts-table th:nth-child(1) { width: 12%; }
+    .eoa-parts-table th:nth-child(2) { width: 38%; }
+    .eoa-parts-table th:nth-child(3) { width: 50%; }
+    .eoa-parts-table td {
+      vertical-align: top;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
   </style>
 </head>
 <body>
 
-  <h1>Bahaa Budargham</h1>
-  <div class="subhead">Independent Researcher · Applied Mathematics &amp; Computational Linguistics</div>
+  <!-- HEADER -->
+  <div class="header">
+    <h1>Engineering of Alphabets (EOA)</h1>
+    <div class="tagline">Research Program · Neurolabs R&amp;D · Symbolic Dynamics &amp; Representation Theory</div>
+  </div>
 
+  <!-- BADGES -->
   <div class="badges">
     <a href="https://orcid.org/0009-0000-2922-8904" target="_blank">ORCID</a>
     <a href="https://github.com/bahaa-budargham" target="_blank">GitHub</a>
     <a href="https://zenodo.org/records/21986309" target="_blank">Zenodo</a>
-    <a href="eoa-program-part0.pdf" 
-   target="_blank"
-   style="
-     display: inline-block;
-     margin-right: 0.8rem;
-     padding: 0.3rem 0.8rem;
-     background: #1e1e1e;
-     color: #fff;
-     border-radius: 20px;
-     font-size: 0.85rem;
-     text-decoration: none;
-   ">
-  EOA Part 0 (PDF)
-</a>
-    <a href="eoa-program-part1.pdf" 
-   target="_blank"
-   style="
-     display: inline-block;
-     margin-right: 0.8rem;
-     padding: 0.3rem 0.8rem;
-     background: #1e1e1e;
-     color: #fff;
-     border-radius: 20px;
-     font-size: 0.85rem;
-     text-decoration: none;
-   ">
-  EOA Part 1 (PDF)
-</a>
-
+    <a href="https://archive.org/details/@eoa-43/" target="_blank">Archive.org</a>
+    <a href="https://bahaa-budargham.github.io/eoa-program-part0.pdf" target="_blank" class="highlight">Part 0 (PDF)</a>
+    <a href="https://bahaa-budargham.github.io/eoa-program-part1.pdf" target="_blank" class="highlight">Part 1 (PDF)</a>
   </div>
 
+  <!-- MAIN NAVIGATION -->
+  <div class="mainnav">
+    <a href="index.html" class="navbtn current">Home</a>
+    <a href="algebraic.html" class="navbtn">Algebraic Foundation</a>
+    <a href="visualizations.html" class="navbtn">Visualizations</a>
+    <a href="questions.html" class="navbtn">Open Questions</a>
+  </div>
+
+  <!-- INTRODUCTION -->
   <p>
-    I am an independent researcher in applied mathematics and computational linguistics. My current work focuses on the <strong>Engineering of Alphabets (EOA) Program</strong> — a research program on deterministic symbolic representations derived from letter-name strings.
+    The <strong>Engineering of Alphabets (EOA)</strong> program investigates a class of deterministic symbolic representations derived from letter-name strings. The research spans <strong>symbolic dynamics</strong>, <strong>representation theory</strong>, <strong>deterministic systems</strong>, and the algebraic structure of <strong>phonetic encodings</strong>.
   </p>
 
-  <h2>Research</h2>
+  <div class="figure-box">
+    <img src="https://bahaa-budargham.github.io/eoa-data/figures/tool-images/tool-eoa-beta-operator-500.png" alt="The EOA beta operator">
+    <div class="caption">The recursive operator β. Schematic of the deterministic transformation that maps spoken letter names to numerical sequences.</div>
+  </div>
 
-  <h3>The EOA Program</h3>
-  <p>The EOA Program investigates a class of deterministic symbolic representations whose algebraic properties depend on the encoding in a globally-coupled way. The work spans:</p>
+  <!-- WHY UNIQUE & PROMISES -->
+  <h2>What EOA Offers and Why It Is Unique</h2>
+
+  <div class="promise-box">
+    <p><strong>EOA is not a learned embedding. It is a structural primitive.</strong></p>
+    <ul>
+      <li><strong>Training free and deterministic:</strong> No data, no loss function, no stochasticity, purely algebraic.</li>
+      <li><strong>16 element sequence-group structure:</strong> The 26 English letters collapse to 16 unique sequences, an unexplained algebraic reduction.</li>
+      <li><strong>Rank 1 dimensionality collapse:</strong> Word vectors built from these sequence groups collapse to a near one dimensional line.</li>
+      <li><strong>Encoding dependent convergence:</strong> The Limiting Constant Ratio (LCR) shifts with phonetic encoding, from 2.710 (Hebrew) to 4.128 (Greek).</li>
+      <li><strong>Algebraic foundation:</strong> 13 sequences form a true basis for a 13-dimensional solution space of a common linear recurrence.</li>
+      <li><strong>Fractal geometry hints:</strong> Recursive, tree like branching underlies the sequence-group collapse, suggesting self similarity.</li>
+      <li><strong>43 open questions:</strong> The program poses 43 open problems across 10 domains, requiring tools from mathematics, linguistics, and machine learning.</li>
+    </ul>
+  </div>
+
+  <!-- CORE OBSERVATIONS -->
+  <h2>Core Observations</h2>
+
   <ul>
-    <li>Symbolic dynamics and convergence ratios.</li>
-    <li>Low-rank structural primitives and memory efficiency.</li>
-    <li>Cross-encoding variation and phonetics.</li>
+    <li><strong>Convergence:</strong> Recursive operator β maps letter names to convergent numerical sequences.</li>
+    <li><strong>Sequence-group collapse:</strong> 26 English letters collapse to 16 distinct sequence groups.</li>
+    <li><strong>Rank-1 dimensionality:</strong> Word vectors built from these sequence groups collapse to near one-dimensional line.</li>
+    <li><strong>Self-similar structure:</strong> Recursive, tree-like fractal geometry hinted at underlying the sequence-group collapse.</li>
   </ul>
 
-  <h3>Publications</h3>
+  <p><strong>Limiting Constant Ratio (LCR):</strong> Encoding-dependent. See table below.</p>
 
-  <div class="publication">
-    <strong>The EOA Program, Part I:</strong> A Rank-Collapsed Deterministic Symbolic Representation with a Convergent Recursive Basis<br>
-    <span class="meta">B. Budargham (2026). arXiv:XXXX.XXXXX</span>
+  <table>
+    <thead>
+      <tr>
+        <th>Encoding</th>
+        <th>LCR (λ)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>English primary</td><td>3.306</td></tr>
+      <tr><td>English modified #1</td><td>3.037</td></tr>
+      <tr><td>English modified #2</td><td>3.173</td></tr>
+      <tr><td>English modified #3</td><td>2.689</td></tr>
+      <tr><td>English modified #4</td><td>3.209</td></tr>
+      <tr class="highlight-row"><td>English modified #5</td><td>3.141</td></tr>
+      <tr><td>Arabic</td><td>2.751</td></tr>
+      <tr><td>Hebrew</td><td>2.710</td></tr>
+      <tr><td>Greek</td><td>4.128</td></tr>
+    </tbody>
+  </table>
+
+  <div class="figure-box">
+    <img src="https://bahaa-budargham.github.io/eoa-data/figures/eoa43_lcr_across_encodings_6E.png" alt="LCR across encodings">
+    <div class="caption">Limiting Constant Ratio (LCR) across encodings. English modified #5 approaches π to three decimal places.</div>
   </div>
 
-  <div class="publication">
-    <strong>The EOA Program, Part II:</strong> Empirical Cross-Encoding Variation of the Limiting Ratio (LCR)<br>
-    <span class="meta">B. Budargham (2026). arXiv:XXXX.XXXXX</span>
-  </div>
+  <!-- VISUALIZATIONS PREVIEW -->
+  <h2>Visualizations</h2>
 
-  <h3>Repository</h3>
   <p>
-    The public repository for the EOA Program contains the basis sequences, notebooks, and supplementary materials:
-    <a href="https://github.com/bahaa-budargham/engineering-of-alphabets" target="_blank">github.com/bahaa-budargham/engineering-of-alphabets</a>.
+    Preliminary visual inspection suggests the generation process forms a recursive, tree-like branching structure. See the <a href="visualizations.html">Visualizations page</a> for the full set. Two examples:
   </p>
 
-  <h2>Education &amp; Recognition</h2>
+  <div class="figure-box">
+    <img src="https://bahaa-budargham.github.io/eoa-data/figures/visuals/tree-branch/eoa43_branching_level_5_E1_3.037.png" alt="Branching tree at level 5">
+    <div class="caption">Branching tree at level 5 (English modified #1, LCR ≈ 3.037).</div>
+  </div>
 
-  <h3>Education</h3>
-  <p>M.A. in Teaching Mathematics, Concordia University, Montréal.</p>
+  <div class="figure-box">
+    <img src="https://bahaa-budargham.github.io/eoa-data/figures/visuals/spirals/eoa43_spiral_tool.png" alt="EOA spiral tool">
+    <div class="caption">Spiral visualization of the recursive generation process.</div>
+  </div>
 
-  <h3>Recognition</h3>
+  <!-- ALGEBRAIC FOUNDATION -->
+  <h2>Algebraic Foundation</h2>
+
+  <p>
+    Under <strong>English modified #5</strong> (LCR ≈ 3.141), the 20 EOA sequences split into two recurrence families. The larger family has 13 sequences that form a true basis for a 13-dimensional solution space of a common linear recurrence. The generating functions share denominator Q₂(x). The other family has denominator Q₁(x) = (x − 1)Q₂(x). The limiting constant ratio is the reciprocal of the smallest-modulus root of Q₂, and it matches π to five decimal places. The 20 sequences satisfy exactly 6 independent linear relations, spanning a 14-dimensional space.
+  </p>
+
+  <p>
+    A tool has been developed to ingest each letter's rational generating function and automatically report shared denominators, shared numerators, and numerator-equals-denominator matches across entries. It also computes pairwise GCDs between denominators and flags letters without a match. Initial results are striking and will be published alongside the full algebraic write-up in Part V.
+  </p>
+
+  <p>
+    <a href="algebraic.html">Read the full algebraic foundation →</a>
+  </p>
+
+  <!-- RESEARCH PROGRAM PARTS -->
+  <h2>EOA Program: Research Parts</h2>
+
+  <table class="eoa-parts-table">
+    <thead>
+      <tr>
+        <th>Part</th>
+        <th>Title</th>
+        <th>What It Covers</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Part 0</strong></td>
+        <td>The Engineering of Alphabets as an Open Frontier</td>
+        <td>Programmatic overview; poses 43 open questions across 10 domains; introduces the EOA program and its scope.</td>
+      </tr>
+      <tr>
+        <td><strong>Part I</strong></td>
+        <td>EOA-43: A Rank-Collapsed Deterministic Word Representation</td>
+        <td>Presents the 43-term sequence vectors, rank-1 collapse, and the EOA-43 word representation.</td>
+      </tr>
+      <tr>
+        <td><strong>Part II</strong></td>
+        <td>Empirical Cross-Encoding Variation of the Limiting Ratio</td>
+        <td>Documents LCR variation across 7 encodings and 4 languages; explores encoding-dependence.</td>
+      </tr>
+      <tr>
+        <td><strong>Part III</strong></td>
+        <td>Transient Structure and Detrended Residuals</td>
+        <td>Analyzes the letter-specific transient regime (terms 1–38) and what information survives.</td>
+      </tr>
+      <tr>
+        <td><strong>Part IV</strong></td>
+        <td>Boundary Mapping on Downstream Tasks</td>
+        <td>Explores applications in NLP, compression, and adversarial robustness.</td>
+      </tr>
+      <tr>
+        <td><strong>Part V</strong></td>
+        <td>The Operator Beta and Its Recurrence Class</td>
+        <td>Theoretical classification of the operator; formal characterization of the recurrence and the 13-dimensional basis.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- OPEN QUESTIONS PREVIEW -->
+  <h2>Open Questions</h2>
+
   <ul>
-    <li>Alumni, Next AI (2025) — top Canadian AI commercialization program.</li>
-    <li><a href="https://try.ka.nz/certificate/KANZ-GWR-0C23A37B23?certificate_type=gwr2&recipient_name=Bahaa+Bu+Dargham&issue_date=July+15%2C+2026&certificate_id=KANZ-GWR-0C23A37B23" target="_blank">Contributor to a Guinness World Records™ achievement (2026)</a>.</li>
+    <li>What operator class produces this convergence: substitution system, linear recurrence, contraction mapping, or none?</li>
+    <li>Why does the 26-letter alphabet collapse to exactly 16 distinct sequence groups?</li>
+    <li>What is the precise, metric-backed definition of the rank-1 collapse?</li>
+    <li>Does the generation process exhibit a formal fractal geometry or self-similar branching structure?</li>
+    <li>Can we design encodings whose LCR approximates π, e, or the golden ratio?</li>
+    <li>Is there a universal ceiling on LCR, or can an encoding push it arbitrarily high?</li>
   </ul>
 
+  <p>
+    <a href="questions.html">Read all 43 open questions →</a>
+  </p>
+
+  <!-- PUBLICATIONS -->
+  <h2>Publications</h2>
+
+  <div class="publication">
+    <strong>The EOA Program, Part 0:</strong> The Engineering of Alphabets as an Open Frontier<br>
+    <span class="meta">B. Budargham (2026). <a href="https://bahaa-budargham.github.io/eoa-program-part0.pdf">PDF</a> · <a href="https://github.com/bahaa-budargham/eoa-part0-paper">Repository</a></span>
+  </div>
+
+  <div class="publication">
+    <strong>The EOA Program, Part I:</strong> EOA-43: A Rank-Collapsed Deterministic Word Representation<br>
+    <span class="meta">B. Budargham (2026). <a href="https://github.com/bahaa-budargham/eoa-part1-paper">Repository</a> · <a href="#">arXiv:XXXX.XXXXX</a></span>
+  </div>
+
+  <div class="publication">
+    <strong>The EOA Program, Part II:</strong> Empirical Cross-Encoding Variation of the Limiting Ratio<br>
+    <span class="meta">B. Budargham (2026). In preparation.</span>
+  </div>
+
+  <div class="publication">
+    <strong>The EOA Program, Parts III–V:</strong> Transient Structure, Downstream Tasks, Operator Classification<br>
+    <span class="meta">B. Budargham (2026). Future.</span>
+  </div>
+
+  <!-- DATA & CODE -->
+  <h2>Data &amp; Code</h2>
+
+  <ul>
+    <li><a href="https://github.com/bahaa-budargham/engineering-of-alphabets" target="_blank"><strong>EOA Program Repository</strong></a>: Main landing page with overview, parts table, and links to all sub-repositories.</li>
+    <li><a href="https://github.com/bahaa-budargham/eoa-data" target="_blank">EOA Data</a>: Pre-convergence sequences, figures, notebooks.</li>
+    <li><a href="https://github.com/bahaa-budargham/eoa-part0-paper" target="_blank">EOA Part 0</a>: Paper repository.</li>
+    <li><a href="https://github.com/bahaa-budargham/eoa-part1-paper" target="_blank">EOA Part I</a>: Paper repository.</li>
+  </ul>
+
+  <!-- CONTACT -->
   <h2>Contact</h2>
+
   <p>
-    Email: <a href="mailto:bdarghamneurolabs@gmail.com">bdarghamneurolabs@gmail.com</a>
+    For collaboration or access to restricted materials (sequence vectors, oracle, or operator), please contact:
+    <br>
+    <a href="mailto:bdarghamneurolabs@gmail.com">bdarghamneurolabs(at)gmail.com</a>
   </p>
 
+  <!-- FOOTER -->
   <div class="footer">
-    <p>Independent researcher · Montreal, Canada</p>
+    <p>
+      <a href="https://www.neurolabs.space">Neurolabs Inc.</a> · Montreal, Canada<br>
+      <span style="font-size: 0.8rem;">© 2026 Bahaa Budargham. All rights reserved.</span>
+    </p>
   </div>
 
 </body>
