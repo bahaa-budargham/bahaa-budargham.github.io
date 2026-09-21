@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visualizations · Engineering of Alphabets (EOA)</title>
+
+  <meta name="description" content="Visualizations of the EOA program: the beta operator, recursive tree-like branching, spiral geometry, group heatmap, and the LCR across encodings. Preliminary visual inspection suggests a self-similar, fractal-like generative structure.">
+  <meta name="keywords" content="EOA, visualizations, beta operator, tree branching, spiral, heatmap, fractal, self-similarity, LCR, symbolic dynamics, representation theory">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://research.neurolabs.space/visualizations.html">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #fcfcfc;
+      color: #1e1e1e;
+      line-height: 1.7;
+      padding: 2rem 1.5rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    nav {
+      margin: 0.5rem 0 1.5rem 0;
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    nav a { color: #1a0dab; text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    nav a.current { color: #1e1e1e; font-weight: 600; }
+        /* Navigation buttons */
+    .mainnav {
+      margin: 1rem 0 2rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      padding: 0.9rem 1rem;
+      background: #f4f4f4;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+    }
+
+    .mainnav a.navbtn {
+      display: inline-block;
+      padding: 0.55rem 1.1rem;
+      font-size: 0.92rem;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      color: #1e1e1e;
+      background: #fff;
+      border: 1px solid #c8c8c8;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+      transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+    }
+
+    .mainnav a.navbtn:hover {
+      background: #e8e8e8;
+      color: #1e1e1e;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.14);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    .mainnav a.navbtn.current,
+    .mainnav a.navbtn.current:hover {
+      background: #1e1e1e;
+      color: #ffffff;
+      border-color: #1e1e1e;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      font-weight: 600;
+      transform: none;
+      text-decoration: none;
+    }
+
+    .header {
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: -0.5px;
+    }
+
+    .header .tagline {
+      font-size: 1rem;
+      color: #555;
+      margin-top: 0.2rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-top: 2.2rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.4rem;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-top: 1.5rem;
+      color: #222;
+    }
+
+    p { margin: 0.8rem 0; }
+
+    ul { list-style: none; padding-left: 0; }
+    ul li { margin-bottom: 0.5rem; padding-left: 1.2rem; text-indent: -1.2rem; }
+    ul li::before { content: "• "; color: #777; }
+
+    a { color: #1a0dab; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    code {
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      font-size: 0.88rem;
+      background: #f4f4f4;
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+    }
+
+    .note {
+      background: #fff7e0;
+      padding: 1rem 1.2rem;
+      border-radius: 6px;
+      border-left: 4px solid #e0b000;
+      margin: 1.2rem 0;
+      font-size: 0.95rem;
+    }
+
+    .figure-box {
+      margin: 1.8rem 0;
+      text-align: center;
+    }
+
+    .figure-box img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: #fff;
+    }
+
+    .figure-box .caption {
+      font-size: 0.88rem;
+      color: #555;
+      margin-top: 0.6rem;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .footer {
+      margin-top: 2.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #ddd;
+      font-size: 0.85rem;
+      color: #666;
+      text-align: center;
+    }
+
+    .footer a { color: #1a0dab; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Engineering of Alphabets (EOA)</h1>
+    <div class="tagline">Research Program · Neurolabs R&amp;D · Symbolic Dynamics &amp; Representation Theory</div>
+  </div>
+
+      <nav class="mainnav">
+    <a href="index.html" class="navbtn">Home</a>
+    <a href="algebraic.html" class="navbtn">Algebraic Foundation</a>
+    <a href="visualizations.html" class="navbtn current">Visualizations</a>
+    <a href="questions.html" class="navbtn">Open Questions</a>
+  </nav>
+
+  <h2>Visualizations</h2>
+
+  <p>
+    The EOA program generates a rich set of visual artifacts. This page collects the principal ones: the operator itself, the recursive branching structure, the spiral geometry, the group heatmap, and the encoding-dependent LCR.
+  </p>
+
+  <div class="note">
+    <strong>Encoding.</strong> Unless stated otherwise, the visualizations on this page use the primary English encoding or English modified #1. The <a href="algebraic.html">algebraic foundation</a> is stated for English modified #5.
+  </div>
+
+  <!-- BETA OPERATOR -->
+  <h2>1. The Beta Operator</h2>
+
+  <p>
+    At the center of the EOA program is a deterministic recursive operator, denoted <code>β</code>. It accepts a spoken letter name as a character string and iteratively applies a fixed transformation that mixes character codes. After successive iterations, the ratio of output terms stabilizes toward the limiting constant ratio.
+  </p>
+
+  <div class="figure-box">
+    <img src="https://bahaa-budargham.github.io/eoa-data/figures/tool-images/tool-eoa-beta-operator-500.png" alt="The EOA beta operator">
+    <div class="caption">The recursive operator β. Schematic of the deterministic transformation that maps spoken letter names to numerical sequences. The full internal recurrence remains undisclosed; only the resulting sequences and their observable properties are released.</div>
+  </div>
+
+  <!-- TREE BRANCHING -->
+  <h2>2. Recursive Tree Branching</h2>
+
+  <p>
+    Preliminary visual inspection of the generation process suggests that it does not produce isolated sequences. Instead, the process appears to expand through multiple branching paths, each of which branches further, eventually settling into a finite closed set from which infinite descendants emerge. This hints at a recursive, tree-like geometry that may underpin the observed sequence-group collapse.
+  </p>
+
+  <div class="figure-box">
+    <img src="https://bahaa-budargham.github.io/eoa-data/figures/visuals/tree-branch/eoa43_branching_level_3_E1_3.037.png" alt="Branching tree at level 3">
+    <div class="caption">Branching tree at level 3 (English modified #1, LCR ≈ 3.037). The early levels of expansion. Each branch will expand further at the next level.</div>
+  </div>
+
+  <div class="figure-box">
+    <img src="https://bahaa-budargham.github.io/eoa-data/figures/visuals/tree-branch/eoa43_branching_level_5_E1_3.037.png" alt="Branching tree at level 5">
+    <div class="caption">Branching tree at level 5 (English modified #1, LCR ≈ 3.037). By level 5 the tree has expanded substantially. The ratio between successive levels approaches the LCR. This is the visual signature of a self-similar generative structure.</div>
+  </div>
+
+  <p>
+    The tree is not a metaphor. It is a direct reading of the generation process. Starting from a single unit and iterating the operator produces a structure that expands, branches, and never terminates. The LCR is the average branching factor of this tree.
+  </p>
+
+  <!-- SPIRAL GEOMETRY -->
+  <h2>3. Spiral Geometry</h2>
+
+  <p>
+    When the same recursive expansion is embedded in polar coordinates, the result is a spiral. The spiral encodes the same information as the tree, but in a continuous geometric form. Each turn of the spiral corresponds to one level of the branching tree.
+  </p>
+
+  <div class="figure-box">
+    <img src="https://bahaa-budargham.github.io/eoa-data/figures/visuals/spirals/eoa43_spiral_fixed_ratio.png" alt="EOA spiral with fixed ratio">
+    <div class="caption">Spiral visualization with a fixed ratio. Each turn corresponds to one level of the branching tree. The spiral provides a continuous geometric view of the same self-similar structure.</div>
+  </div>
+
+  <div class="figure-box">
+    <img src="https://bahaa-budargham.github.io/eoa-data/figures/visuals/spirals/eoa43_spiral_local_ratio.png" alt="EOA spiral with local ratio">
+    <div class="caption">Spiral visualization with a local ratio. The same recursive expansion, showing how the ratio evolves across turns. The spiral and the tree are two views of the same object.</div>
+  </div>
+
+  <p>
+    The spiral and the tree are two views of the same object. The tree emphasizes discrete branching; the spiral emphasizes continuous rotation and scaling. Both suggest that the underlying generative structure is recursive, scale-invariant, and self-similar.
+  </p>
+
+  <!-- GROUP HEATMAP -->
+  <h2>4. Group Heatmap</h2>
+
+  <p>
+    The group heatmap shows the pairwise similarity between the 16 distinct sequence groups under English modified #2 (LCR ≈ 3.173). Letters that share a sequence group appear as a single block. The heatmap provides a compact visual summary of the algebraic reduction from 26 letters to 16 sequence groups.
+  </p>
+
+  <div class="figure-box">
+    <img src="https://bahaa-budargham.github.io/eoa-data/figures/visuals/heatmap/eoa43_group_heatmap_E2_3.173.png" alt="EOA group heatmap">
+    <div class="caption">Group heatmap for English modified #2 (LCR ≈ 3.173). Each block corresponds to a sequence group. The 26 letters collapse to 16 distinct sequence groups. The heatmap visualizes the algebraic structure that underlies the rank collapse.</div>
+  </div>
+
+  <!-- LCR CHART -->
+  <h2>5. LCR Across Encodings</h2>
+
+  <p>
+    The limiting constant ratio (LCR) is not a universal constant. It depends on the phonetic encoding of the alphabet. The chart below shows the LCR values across the encodings currently documented in the program.
+  </p>
+
+  <div class="figure-box">
+    <img src="https://bahaa-budargham.github.io/eoa-data/figures/eoa43_lcr_across_encodings_6E.png" alt="LCR across encodings">
+    <div class="caption">Limiting Constant Ratio (LCR) across encodings. English modified #5 approaches π to three decimal places. Arabic and Hebrew cluster near 2.71, while Greek reaches 4.128.</div>
+  </div>
+
+  <p>
+    The full table of LCR values is maintained on the <a href="index.html">home page</a>. The variation across encodings is itself an open problem: is the LCR a computable function of the encoding, and if so, what properties of the encoding determine it?
+  </p>
+
+  <!-- FRACTAL STRUCTURE -->
+  <h2>6. Fractal and Self-Similar Structure</h2>
+
+  <p>
+    The tree and the spiral are not merely visual curiosities. They point to a deeper structural property that we have not yet formalized. Beyond the reported convergence and sequence-group collapse, the generation process appears to form a recursive, tree-like expansion from the initial alphabet. The sequence exhibits hints of self-similarity: the start of the iteration contains within it the structure of the whole, and each subsequent growth phase resembles a nested version of the original.
+  </p>
+
+  <p>
+    This suggests that the system may possess fractal-like properties. Whether this is a genuine fractal structure, and what its formal characterization might be, remains an open question. We invite collaborators with expertise in fractal geometry, branching processes, and recursive dynamical systems to help formalize this observation.
+  </p>
+
+  <div class="note">
+    <strong>Status.</strong> The fractal interpretation is a structural hint, not a proven result. It is raised here as a visual and conceptual frontier. Formal characterization is deferred to Part III or a future paper.
+  </div>
+
+  <!-- SUMMARY -->
+  <h2>7. Summary</h2>
+
+  <ul>
+    <li><strong>Beta operator:</strong> the deterministic transformation at the center of the program.</li>
+    <li><strong>Tree branching:</strong> recursive, self-similar expansion from a single unit (levels 3 and 5 shown).</li>
+    <li><strong>Spiral geometry:</strong> the same expansion in polar coordinates (fixed ratio and local ratio views).</li>
+    <li><strong>Group heatmap:</strong> the 26-to-16 collapse visualized as pairwise sequence-group similarity.</li>
+    <li><strong>LCR across encodings:</strong> encoding-dependent convergence, from 2.710 to 4.128.</li>
+    <li><strong>Fractal structure:</strong> preliminary visual hints, awaiting formal characterization.</li>
+  </ul>
+
+  <div class="footer">
+    <p>
+      <a href="https://www.neurolabs.space">Neurolabs Inc.</a> · Montreal, Canada<br>
+      <span style="font-size: 0.8rem;">© 2026 Bahaa Budargham. All rights reserved.</span>
+    </p>
+  </div>
+
+</body>
+</html>

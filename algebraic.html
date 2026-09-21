@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algebraic Foundation · Engineering of Alphabets (EOA)</title>
+
+  <meta name="description" content="The algebraic foundation of the EOA program for the English modified #5 encoding: a 13-dimensional basis for a common linear recurrence, the relation Q1 = (x-1)Q2, six independent linear dependencies, and the LCR as the reciprocal of the smallest-modulus root of Q2.">
+  <meta name="keywords" content="EOA, algebraic foundation, English modified #5, linear recurrence, 13-dimensional basis, Q1, Q2, characteristic polynomial, LCR, symbolic dynamics, representation theory">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://research.neurolabs.space/algebraic.html">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #fcfcfc;
+      color: #1e1e1e;
+      line-height: 1.7;
+      padding: 2rem 1.5rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    nav {
+      margin: 0.5rem 0 1.5rem 0;
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    nav a { color: #1a0dab; text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    nav a.current { color: #1e1e1e; font-weight: 600; }
+        /* Navigation buttons */
+    .mainnav {
+      margin: 1rem 0 2rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      padding: 0.9rem 1rem;
+      background: #f4f4f4;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+    }
+
+    .mainnav a.navbtn {
+      display: inline-block;
+      padding: 0.55rem 1.1rem;
+      font-size: 0.92rem;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      color: #1e1e1e;
+      background: #fff;
+      border: 1px solid #c8c8c8;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+      transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+    }
+
+    .mainnav a.navbtn:hover {
+      background: #e8e8e8;
+      color: #1e1e1e;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.14);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    .mainnav a.navbtn.current,
+    .mainnav a.navbtn.current:hover {
+      background: #1e1e1e;
+      color: #ffffff;
+      border-color: #1e1e1e;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      font-weight: 600;
+      transform: none;
+      text-decoration: none;
+    }
+
+    .header {
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: -0.5px;
+    }
+
+    .header .tagline {
+      font-size: 1rem;
+      color: #555;
+      margin-top: 0.2rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-top: 2.2rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.4rem;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-top: 1.5rem;
+      color: #222;
+    }
+
+    p { margin: 0.8rem 0; }
+
+    ul { list-style: none; padding-left: 0; }
+    ul li { margin-bottom: 0.5rem; padding-left: 1.2rem; text-indent: -1.2rem; }
+    ul li::before { content: "• "; color: #777; }
+
+    a { color: #1a0dab; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    code, .polynomial {
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      font-size: 0.88rem;
+      background: #f4f4f4;
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+    .polynomial-block {
+      display: block;
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      font-size: 0.85rem;
+      background: #f4f4f4;
+      padding: 0.8rem 1rem;
+      border-radius: 6px;
+      border-left: 4px solid #888;
+      margin: 0.8rem 0;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      line-height: 1.5;
+    }
+
+    .theorem {
+      background: #f0f0f0;
+      padding: 1.2rem 1.5rem;
+      border-radius: 8px;
+      margin: 1.2rem 0;
+      border-left: 4px solid #1e1e1e;
+    }
+
+    .theorem strong { font-weight: 600; }
+
+    .note {
+      background: #fff7e0;
+      padding: 1rem 1.2rem;
+      border-radius: 6px;
+      border-left: 4px solid #e0b000;
+      margin: 1.2rem 0;
+      font-size: 0.95rem;
+    }
+
+    .figure-box {
+      margin: 1.8rem 0;
+      text-align: center;
+    }
+
+    .figure-box img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: #fff;
+    }
+
+    .figure-box .caption {
+      font-size: 0.88rem;
+      color: #555;
+      margin-top: 0.6rem;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .dependency {
+      margin: 0.8rem 0 1.2rem 0;
+      padding-left: 1rem;
+      border-left: 3px solid #ccc;
+    }
+
+    .dependency .label {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    .dependency .terms {
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      margin-top: 0.3rem;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+    .footer {
+      margin-top: 2.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #ddd;
+      font-size: 0.85rem;
+      color: #666;
+      text-align: center;
+    }
+
+    .footer a { color: #1a0dab; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>Engineering of Alphabets (EOA)</h1>
+    <div class="tagline">Research Program · Neurolabs R&amp;D · Symbolic Dynamics &amp; Representation Theory</div>
+  </div>
+
+  <!-- NAVIGATION -->
+   <nav class="mainnav">
+    <a href="index.html" class="navbtn">Home</a>
+    <a href="algebraic.html" class="navbtn current">Algebraic Foundation</a>
+    <a href="visualizations.html" class="navbtn">Visualizations</a>
+    <a href="questions.html" class="navbtn">Open Questions</a>
+  </nav>
+
+  <!-- INTRODUCTION -->
+  <h2>Algebraic Foundation</h2>
+
+  <div class="note">
+    <strong>Encoding.</strong> All results on this page are for the <strong>English modified #5</strong> encoding, whose Limiting Constant Ratio (LCR) is approximately <strong>3.141</strong>. This is the encoding that produces the 13-dimensional basis and the shared linear recurrence documented below.
+  </div>
+
+  <p>
+    The EOA sequences are not arbitrary. Each letter's sequence has a rational generating function of the form P(x)/Q(x), where P(x) and Q(x) are polynomials with rational coefficients. Below is the rational generating function for the letter <code>t</code> under English modified #5. This is the kind of object that the entire algebraic foundation is built from.
+  </p>
+
+  <div class="figure-box">
+    <img src="https://research.neurolabs.space/algebraic_function_letter_t_LCR3.14.png" alt="Rational generating function of letter t under LCR 3.14">
+    <div class="caption">
+      The rational generating function of letter <code>t</code> under English modified #5 (LCR ≈ 3.141). The numerator encodes the letter-specific initial conditions. The denominator is shared across all letters in the same recurrence family.
+    </div>
+  </div>
+
+  <!-- TWO FAMILIES -->
+  <h2>1. Two Recurrence Families</h2>
+
+  <p>
+    Under English modified #5, the 20 distinct letter sequences split into two families. Each family shares a common generating-function denominator, and therefore a common linear recurrence.
+  </p>
+
+  <h3>Group 2 — 13 letters</h3>
+
+  <p>
+    Letters: <code>a, d, e, g, h, i, k, L, q, u, w, y, z</code>
+  </p>
+
+  <p>
+    Common denominator (degree 13):
+  </p>
+
+  <div class="polynomial-block">
+    Q₂(x) = 4x¹³ − 21x¹² + 45x¹¹ − 74x¹⁰ + 98x⁹ − 34x⁸ − 116x⁷ + 210x⁶ − 152x⁵ + 26x⁴ + 38x³ − 30x² + 9x − 1
+  </div>
+
+  <h3>Group 1 — 7 letters</h3>
+
+  <p>
+    Letters: <code>t, b, c, j, o, p, x</code>
+  </p>
+
+  <p>
+    Common denominator (degree 14):
+  </p>
+
+  <div class="polynomial-block">
+    Q₁(x) = 4x¹⁴ − 25x¹³ + 66x¹² − 119x¹¹ + 172x¹⁰ − 132x⁹ − 82x⁸ + 326x⁷ − 362x⁶ + 178x⁵ + 12x⁴ − 68x³ + 39x² − 10x + 1
+  </div>
+
+  <h3>The relation between Q₁ and Q₂</h3>
+
+  <p>
+    The two denominators are not independent. Direct factorization shows:
+  </p>
+
+  <div class="polynomial-block">
+    Q₁(x) = (x − 1) · Q₂(x)
+  </div>
+
+  <p>
+    Therefore the greatest common divisor is:
+  </p>
+
+  <div class="polynomial-block">
+    gcd(Q₁, Q₂) = Q₂(x)
+  </div>
+
+  <p>
+    The extra factor <code>(x − 1)</code> in Q₁ introduces one constant mode. This is the only difference between the two families. The dominant behaviour of all 20 sequences is governed by Q₂.
+  </p>
+
+  <!-- BASIS THEOREM -->
+  <h2>2. The Basis Theorem</h2>
+
+  <div class="theorem">
+    <p><strong>Theorem (EOA Basis for English Modified #5).</strong> The 13 sequences of Group 2 are linearly independent over ℚ. They form a true basis for the 13-dimensional solution space of the linear recurrence defined by Q₂.</p>
+  </div>
+
+  <p>
+    The proof is by direct computation. Form the 13 × 13 matrix whose rows are the first 13 terms of each Group 2 sequence. Compute its rank and determinant. The result is:
+  </p>
+
+  <ul>
+    <li>Rank = 13</li>
+    <li>Determinant = 216,926,397,272 ≠ 0</li>
+  </ul>
+
+  <p>
+    A nonzero determinant means the rows are linearly independent. Since there are 13 rows in a 13-dimensional space, they span the entire space. This is the algebraic heart of the EOA program for English modified #5: the shared convergence, the rank collapse, and the sequence-group structure are all consequences of a single common linear recurrence.
+  </p>
+
+  <!-- LCR -->
+  <h2>3. The Limiting Constant Ratio</h2>
+
+  <p>
+    For a sequence whose generating function is P(x)/Q(x), the limiting ratio of consecutive terms is the reciprocal of the smallest-modulus root of Q(x). This is a standard result in linear recurrence theory. The roots of Q are the reciprocals of the characteristic roots; the dominant characteristic root is the reciprocal of the smallest-modulus root of Q.
+  </p>
+
+  <p>
+    Q₂ has 13 roots. The smallest-modulus root is:
+  </p>
+
+  <div class="polynomial-block">
+    x₀ ≈ 0.318309828431957…
+  </div>
+
+  <p>
+    Its reciprocal is:
+  </p>
+
+  <div class="polynomial-block">
+    1 / x₀ ≈ 3.14159265…
+  </div>
+
+  <p>
+    This value matches π to five decimal places. This is the LCR for English modified #5. We do not claim exact equality with π; we report the numerical agreement.
+  </p>
+
+  <p>
+    The largest root of Q₂ is 2.4914…, but this governs a fast-decaying mode and is irrelevant to the LCR. The LCR is determined by the smallest-modulus root, as explained above.
+  </p>
+
+  <!-- DEPENDENCIES -->
+  <h2>4. Linear Dependencies</h2>
+
+  <p>
+    The 20 sequences span a 14-dimensional space (the solution space of Q₁). Therefore there must be exactly 6 independent linear relations. They are listed below. Each relation is of the form:
+  </p>
+
+  <div class="polynomial-block">
+    α₁ S₁ + α₂ S₂ + ⋯ + α₂₀ S₂₀ = 0
+  </div>
+
+  <p>
+    where Sᵢ denotes the sequence for a letter under English modified #5.
+  </p>
+
+  <h3>Relation 1</h3>
+  <div class="dependency">
+    <div class="terms">
+      −2·S_b − 1·S_c − 3·S_e + 1·S_h − 2·S_j − 2·S_k + 1·S_o = 0
+    </div>
+  </div>
+
+  <h3>Relation 2</h3>
+  <div class="dependency">
+    <div class="terms">
+      −1·S_b + 1·S_i + 1·S_j + 1·S_p = 0
+    </div>
+  </div>
+
+  <h3>Relation 3</h3>
+  <div class="dependency">
+    <div class="terms">
+      1·S_t − 1·S_b + 1·S_c − 2·S_e + 2·S_i + 1·S_k − 1·S_q + 1·S_u = 0
+    </div>
+  </div>
+
+  <h3>Relation 4</h3>
+  <div class="dependency">
+    <div class="terms">
+      −76241200071/27115799659·S_t − 1576447438/2085830743·S_a − 114771594969/216926397272·S_b + 53682835069/54231599318·S_c − 3112982248/2085830743·S_d + 377784251903/108463198636·S_e + 3320347499/4171661486·S_g + 46788721217/108463198636·S_h − 30336266964/27115799659·S_i + 368911142517/108463198636·S_j + 84390538535/108463198636·S_k − 47912034055/216926397272·S_L − 8879446664/27115799659·S_q + 51766082105/108463198636·S_w + 1·S_x = 0
+    </div>
+  </div>
+
+  <h3>Relation 5</h3>
+  <div class="dependency">
+    <div class="terms">
+      1·S_t − 1·S_b + 1·S_c − 1·S_e + 2·S_i + 1·S_j + 1·S_k − 1·S_q + 1·S_y = 0
+    </div>
+  </div>
+
+  <h3>Relation 6</h3>
+  <div class="dependency">
+    <div class="terms">
+      −1·S_t + 1·S_b − 1·S_g + 1·S_z = 0
+    </div>
+  </div>
+
+  <p>
+    Relations 1–3 and 5–6 are sparse. Relation 4 is dense and involves the full 13-letter basis plus S_x. This is the relation that connects the 7 Group 1 letters to the 13 Group 2 letters. It is the algebraic bridge between the two families.
+  </p>
+
+  <!-- RATIONAL TOOL -->
+  <h2>5. Rational-Function Registry Tool</h2>
+
+  <p>
+    We have developed a tool that ingests each letter's rational generating function and automatically reports:
+  </p>
+
+  <ul>
+    <li>Shared denominators across entries</li>
+    <li>Shared numerators across entries</li>
+    <li>Numerator-equals-denominator matches</li>
+    <li>Pairwise GCDs between denominators</li>
+    <li>Letters left without a match</li>
+  </ul>
+
+  <p>
+    The tool supports row-based entry of letter, function image, function text, and LCR value. It supports import/append/replace of previously exported registry files, and it embeds a summary inside the exported HTML.
+  </p>
+
+  <p>
+    Initial results from the tool are striking and will be published alongside the full algebraic write-up in Part V.
+  </p>
+
+  <!-- SUMMARY -->
+  <h2>6. Summary</h2>
+
+  <div class="theorem">
+    <p>
+      <strong>EOA Algebraic Foundation for English Modified #5.</strong> Under English modified #5, the 20 EOA sequences split into two recurrence families. Group 2 (13 letters) forms a true basis for a 13-dimensional solution space of Q₂. Group 1 (7 letters) extends this by one constant mode via Q₁ = (x − 1)Q₂. The LCR is the reciprocal of the smallest-modulus root of Q₂ and matches π to five decimal places. The 20 sequences satisfy exactly 6 independent linear relations, spanning 14 dimensions.
+    </p>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>
+      <a href="https://www.neurolabs.space">Neurolabs Inc.</a> · Montreal, Canada<br>
+      <span style="font-size: 0.8rem;">© 2026 Bahaa Budargham. All rights reserved.</span>
+    </p>
+  </div>
+
+</body>
+</html>

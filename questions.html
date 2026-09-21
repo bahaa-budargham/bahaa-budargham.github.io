@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Questions · Engineering of Alphabets (EOA)</title>
+
+  <meta name="description" content="All 43 open questions of the EOA program, grouped across 10 domains: operator classification, limiting ratio, sequence-group structure, dimensionality collapse, transients, cross-linguistic variation, applications, reverse design, disclosure, and structural hints.">
+  <meta name="keywords" content="EOA, open questions, symbolic dynamics, representation theory, operator classification, limiting ratio, rank collapse, cross-linguistic, reverse design, staged disclosure, fractal structure">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://research.neurolabs.space/questions.html">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #fcfcfc;
+      color: #1e1e1e;
+      line-height: 1.7;
+      padding: 2rem 1.5rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    nav {
+      margin: 0.5rem 0 1.5rem 0;
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    nav a { color: #1a0dab; text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    nav a.current { color: #1e1e1e; font-weight: 600; }
+        /* Navigation buttons */
+    .mainnav {
+      margin: 1rem 0 2rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      padding: 0.9rem 1rem;
+      background: #f4f4f4;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+    }
+
+    .mainnav a.navbtn {
+      display: inline-block;
+      padding: 0.55rem 1.1rem;
+      font-size: 0.92rem;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      color: #1e1e1e;
+      background: #fff;
+      border: 1px solid #c8c8c8;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+      transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+    }
+
+    .mainnav a.navbtn:hover {
+      background: #e8e8e8;
+      color: #1e1e1e;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.14);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    .mainnav a.navbtn.current,
+    .mainnav a.navbtn.current:hover {
+      background: #1e1e1e;
+      color: #ffffff;
+      border-color: #1e1e1e;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      font-weight: 600;
+      transform: none;
+      text-decoration: none;
+    }
+
+    .header {
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: -0.5px;
+    }
+
+    .header .tagline {
+      font-size: 1rem;
+      color: #555;
+      margin-top: 0.2rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-top: 2.2rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.4rem;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 400;
+      margin-top: 1.8rem;
+      color: #222;
+    }
+
+    p { margin: 0.8rem 0; }
+
+    a { color: #1a0dab; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .note {
+      background: #fff7e0;
+      padding: 1rem 1.2rem;
+      border-radius: 6px;
+      border-left: 4px solid #e0b000;
+      margin: 1.2rem 0;
+      font-size: 0.95rem;
+    }
+
+    .q-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 1rem 0;
+    }
+
+    .q-list li {
+      margin-bottom: 1rem;
+      padding-left: 3.8rem;
+      text-indent: -3.8rem;
+      line-height: 1.6;
+    }
+
+    .q-list li::before {
+      content: "";
+    }
+
+    .q-id {
+      display: inline-block;
+      width: 3.4rem;
+      font-weight: 600;
+      color: #555;
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      font-size: 0.88rem;
+      vertical-align: top;
+    }
+
+    .domain-summary {
+      font-size: 0.92rem;
+      color: #666;
+      margin: 0.3rem 0 1rem 0;
+    }
+
+    .footer {
+      margin-top: 2.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #ddd;
+      font-size: 0.85rem;
+      color: #666;
+      text-align: center;
+    }
+
+    .footer a { color: #1a0dab; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>Engineering of Alphabets (EOA)</h1>
+    <div class="tagline">Research Program · Neurolabs R&amp;D · Symbolic Dynamics &amp; Representation Theory</div>
+  </div>
+
+  <!-- NAVIGATION -->
+   <nav class="mainnav">
+    <a href="index.html" class="navbtn">Home</a>
+    <a href="algebraic.html" class="navbtn">Algebraic Foundation</a>
+    <a href="visualizations.html" class="navbtn">Visualizations</a>
+    <a href="questions.html" class="navbtn current">Open Questions</a>
+  </nav>
+
+  <!-- INTRODUCTION -->
+  <h2>Open Questions</h2>
+
+  <p>
+    The EOA program poses 43 open questions across 10 domains. They are genuine open problems, not rhetorical questions. Some may have short answers. Others may require new mathematical frameworks. A few may turn out to be ill-posed, revealing that our underlying assumptions are wrong. All of them are real.
+  </p>
+
+  <div class="note">
+    <strong>Invitation.</strong> These questions are not solvable by a single researcher or a single discipline. We invite mathematicians, phoneticians, computer scientists, cryptographers, and representation theorists to collaborate. See the <a href="index.html">home page</a> for contact information.
+  </div>
+
+  <!-- DOMAIN 2: OPERATOR -->
+  <h2>Domain 2 · Operator</h2>
+  <p class="domain-summary">The class, structure, and dynamics of the operator β.</p>
+
+  <ul class="q-list">
+    <li><span class="q-id">Q2.1</span> What operator class produces this convergence: substitution system, linear recurrence, contraction mapping, or none of these?</li>
+    <li><span class="q-id">Q2.2</span> Why does a least-squares linear fit of the recurrence matrix fail? Where does the nonlinearity actually live?</li>
+    <li><span class="q-id">Q2.3</span> Would random symbols converge to a shared ratio, or is alphabet-specific structure required?</li>
+    <li><span class="q-id">Q2.4</span> Is the transient regime monotonic, oscillatory, or chaotic?</li>
+  </ul>
+
+  <!-- DOMAIN 3: LIMITING RATIO -->
+  <h2>Domain 3 · Limiting Ratio</h2>
+  <p class="domain-summary">The limiting constant ratio (LCR) and its dependence on the phonetic encoding.</p>
+
+  <ul class="q-list">
+    <li><span class="q-id">Q3.1</span> Is λ a computable function of the encoding? Can one predict λ without running β?</li>
+    <li><span class="q-id">Q3.2</span> What properties of the encoding determine λ: mean letter-name length, character-frequency distribution, phonetic-feature profile, or graph-theoretic structure?</li>
+    <li><span class="q-id">Q3.3</span> Which phonetic-feature profile is most predictive of λ, and does it vary across languages?</li>
+    <li><span class="q-id">Q3.4</span> The English modified #1 encoding shifts λ from 3.306 to 3.037. Is there a continuous mapping from phonetic-space to λ-space? Can we design an encoding whose LCR approximates a target value to arbitrary precision?</li>
+    <li><span class="q-id">Q3.5</span> Is there a universal ceiling on LCR, or can an encoding push it arbitrarily high?</li>
+  </ul>
+
+  <!-- DOMAIN 4: BASIS -->
+  <h2>Domain 4 · Sequence-Group Structure</h2>
+  <p class="domain-summary">The collapse from 26 letters to 16 distinct sequence groups and its algebraic origin.</p>
+
+  <ul class="q-list">
+    <li><span class="q-id">Q4.1</span> Why does the 26-letter alphabet collapse to exactly 16 distinct sequence groups? Is this number a function of the alphabet size?</li>
+    <li><span class="q-id">Q4.2</span> What property of the letter-name strings, not the phonemes, determines membership in a group?</li>
+    <li><span class="q-id">Q4.3</span> If we added a 27th letter to English, would the group structure grow to 17, or would the new letter slot into an existing group?</li>
+    <li><span class="q-id">Q4.4</span> Are the 13 sequences that form the basis for Q₂ (English modified #5) also a basis under other encodings?</li>
+  </ul>
+
+  <!-- DOMAIN 5: DIMENSIONALITY -->
+  <h2>Domain 5 · Dimensionality Collapse</h2>
+  <p class="domain-summary">The apparent rank-1 collapse of word vectors built from the sequence groups.</p>
+
+  <ul class="q-list">
+    <li><span class="q-id">Q5.1</span> What is the precise, metric-backed definition of the apparent rank-1 collapse? Exact rank 1, numerical rank 1 under a specified tolerance, or an artifact of the construction formula?</li>
+    <li><span class="q-id">Q5.2</span> Is the collapse a bug or a design feature? A limitation to overcome or a structural property to exploit?</li>
+    <li><span class="q-id">Q5.3</span> What information survives in the small deviations from rank 1, and can that information be recovered?</li>
+    <li><span class="q-id">Q5.4</span> Can the collapse be exploited for adversarial robustness, where perturbations orthogonal to the line are harmless?</li>
+  </ul>
+
+  <!-- DOMAIN 6: TRANSIENT -->
+  <h2>Domain 6 · Transient Structure</h2>
+  <p class="domain-summary">The letter-specific early terms (1–38) and what information they carry.</p>
+
+  <ul class="q-list">
+    <li><span class="q-id">Q6.1</span> What information survives in the transient regime, and how much of it is letter-specific?</li>
+    <li><span class="q-id">Q6.2</span> Can the transient be detrended by λⁿ to isolate residual letter-specific structure?</li>
+    <li><span class="q-id">Q6.3</span> Is the transient monotonic, oscillatory, or chaotic across different encodings?</li>
+    <li><span class="q-id">Q6.4</span> Could the transient structure serve as a deterministic fingerprint for individual letters?</li>
+  </ul>
+
+  <!-- DOMAIN 7: CROSS-LINGUISTIC -->
+  <h2>Domain 7 · Cross-Linguistic Variation</h2>
+  <p class="domain-summary">How the phenomenon behaves across scripts, languages, and synthetic alphabets.</p>
+
+  <ul class="q-list">
+    <li><span class="q-id">Q7.1</span> Do non-alphabetic scripts (syllabaries, abugidas, logographies) show analogous convergence? Can β even digest the names of hiragana, katakana, or Devanagari characters?</li>
+    <li><span class="q-id">Q7.2</span> Is the tight Semitic cluster (Arabic 2.751, Hebrew 2.710) a structural property of abjads, or just a small-sample artifact? Could it come from consonantal roots or vowel omission?</li>
+    <li><span class="q-id">Q7.3</span> Would a synthetic alphabet with no phonetic history still produce a basis and an LCR? If yes, the phenomenon is purely formal. If no, the phonetic grounding actually matters.</li>
+    <li><span class="q-id">Q7.4</span> Is there a relationship between alphabet size and λ (English 26, Hebrew 22, Greek 24)? How would we test it properly with a larger sample?</li>
+  </ul>
+
+  <!-- DOMAIN 8: APPLICATIONS -->
+  <h2>Domain 8 · Applications</h2>
+  <p class="domain-summary">Downstream uses of the EOA representation in NLP, compression, cryptography, and machine learning.</p>
+
+  <ul class="q-list">
+    <li><span class="q-id">Q8.1</span> Can the EOA representation be used in low-resource settings where training data is unavailable?</li>
+    <li><span class="q-id">Q8.2</span> Is there any downstream task where a low-rank, semantically empty, but algebraically rigid representation is actually useful (e.g., adversarial robustness, reproducible benchmarking)?</li>
+    <li><span class="q-id">Q8.3</span> Can the 13-dimensional basis be used as a fixed codebook for deterministic source coding?</li>
+    <li><span class="q-id">Q8.4</span> Can the LCR be exploited for deterministic pseudorandom number generation?</li>
+    <li><span class="q-id">Q8.5</span> Can the sequence-group structure be used for lossless compression of letter-name dictionaries?</li>
+    <li><span class="q-id">Q8.6</span> Can EOA-43 act as a zero-training structural prior or fixed initialization for learned embeddings, reducing trainable parameters?</li>
+    <li><span class="q-id">Q8.7</span> How does the EOA representation compare to character trigram hashing and random vector baselines on standard benchmarks?</li>
+  </ul>
+
+  <!-- DOMAIN 9: REVERSE DESIGN -->
+  <h2>Domain 9 · Reverse Design and Targetability</h2>
+  <p class="domain-summary">Using the encoding-to-LCR mapping to design encodings with desired properties.</p>
+
+  <ul class="q-list">
+    <li><span class="q-id">Q9.1</span> Can we search for encodings whose λ approximates π, e, or the golden ratio to arbitrary precision?</li>
+    <li><span class="q-id">Q9.2</span> What constraints govern inverse design? Must the encoding stay phonetic and bijective?</li>
+    <li><span class="q-id">Q9.3</span> Can an encoding be designed so its sequence terms encode primes at specific positions?</li>
+    <li><span class="q-id">Q9.4</span> How large is the space of bijective encodings for a 26-letter alphabet, and can we search it efficiently?</li>
+    <li><span class="q-id">Q9.5</span> What would a targetable λ actually enable? A representation tuned to π might possess periodic properties; a representation tuned to the golden ratio might exhibit self-similarity.</li>
+  </ul>
+
+  <!-- DOMAIN 10: DISCLOSURE -->
+  <h2>Domain 10 · Epistemology of Staged Disclosure</h2>
+  <p class="domain-summary">The philosophy of science and priority questions raised by disclosing the phenomenon but not the mechanism.</p>
+
+  <ul class="q-list">
+    <li><span class="q-id">Q10.1</span> Is it legitimate to publish empirical observations of a phenomenon whose generative mechanism remains undisclosed?</li>
+    <li><span class="q-id">Q10.2</span> What precedent exists for staged disclosure in mathematics and the sciences?</li>
+    <li><span class="q-id">Q10.3</span> What precedent exists for staged disclosure in mathematics (RSA-129, AlphaFold)?</li>
+    <li><span class="q-id">Q10.4</span> How should priority be adjudicated when the phenomenon is public but the mechanism is not?</li>
+  </ul>
+
+  <!-- DOMAIN 11: STRUCTURAL HINTS -->
+  <h2>Domain 11 · Structural Hints and Unseen Dynamics</h2>
+  <p class="domain-summary">Preliminary observations of a recursive, tree-like geometry that may underpin the sequence-group collapse.</p>
+
+  <ul class="q-list">
+    <li><span class="q-id">Q11.1</span> Does the recursive generation exhibit a self-similar branching structure that converges to a finite closed set yet generates infinite descendants, and can its geometry be formally characterized?</li>
+    <li><span class="q-id">Q11.2</span> Can the tree-like propagation be characterized by a finite grammar (e.g., L-system), and would such a grammar explain the 16-element group structure and the dimensionality collapse?</li>
+  </ul>
+
+  <!-- SUMMARY -->
+  <h2>Summary</h2>
+
+  <p>
+    43 open questions across 10 domains. They range from operator classification (Domain 2) through encoding dependence (Domain 3), group structure (Domain 4), rank collapse (Domain 5), transients (Domain 6), cross-linguistic variation (Domain 7), applications (Domain 8), reverse design (Domain 9), disclosure (Domain 10), and structural hints (Domain 11).
+  </p>
+
+  <p>
+    The questions are open. We invite the community to answer them.
+  </p>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>
+      <a href="https://www.neurolabs.space">Neurolabs Inc.</a> · Montreal, Canada<br>
+      <span style="font-size: 0.8rem;">© 2026 Bahaa Budargham. All rights reserved.</span>
+    </p>
+  </div>
+
+</body>
+</html>
