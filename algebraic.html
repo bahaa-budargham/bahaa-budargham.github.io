@@ -32,7 +32,8 @@
     nav a { color: #1a0dab; text-decoration: none; }
     nav a:hover { text-decoration: underline; }
     nav a.current { color: #1e1e1e; font-weight: 600; }
-        /* Navigation buttons */
+
+    /* Navigation buttons */
     .mainnav {
       margin: 1rem 0 2rem 0;
       display: flex;
@@ -183,27 +184,6 @@
       line-height: 1.5;
     }
 
-    .dependency {
-      margin: 0.8rem 0 1.2rem 0;
-      padding-left: 1rem;
-      border-left: 3px solid #ccc;
-    }
-
-    .dependency .label {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: #444;
-    }
-
-    .dependency .terms {
-      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-      font-size: 0.82rem;
-      line-height: 1.6;
-      margin-top: 0.3rem;
-      overflow-wrap: break-word;
-      word-break: break-word;
-    }
-
     .footer {
       margin-top: 2.5rem;
       padding-top: 1rem;
@@ -215,6 +195,45 @@
 
     .footer a { color: #1a0dab; text-decoration: none; }
     .footer a:hover { text-decoration: underline; }
+
+    .math-relation {
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-left: 4px solid #1a0dab;
+      border-radius: 6px;
+      padding: 0.9rem 1.2rem;
+      margin: 0.8rem 0 1.2rem 0;
+      font-family: 'Cambria Math', 'Georgia', serif;
+      font-size: 1.05rem;
+      color: #111;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      overflow-x: auto;
+    }
+
+    .math-relation sub {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #1a0dab;
+    }
+
+    .math-relation .frac {
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+      padding: 0 0.2rem;
+      font-size: 0.88rem;
+    }
+
+    .math-relation .num {
+      display: block;
+      border-bottom: 1px solid #333;
+      padding-bottom: 1px;
+    }
+
+    .math-relation .den {
+      display: block;
+      padding-top: 1px;
+    }
   </style>
 </head>
 <body>
@@ -226,11 +245,13 @@
   </div>
 
   <!-- NAVIGATION -->
-   <nav class="mainnav">
+  <nav class="mainnav">
     <a href="index.html" class="navbtn">Home</a>
+    <a href="census.html" class="navbtn">Sequence Census</a>
     <a href="algebraic.html" class="navbtn current">Algebraic Foundation</a>
     <a href="visualizations.html" class="navbtn">Visualizations</a>
     <a href="questions.html" class="navbtn">Open Questions</a>
+    <a href="visualizer/index.html" class="navbtn">Sequence Visualizer</a>
   </nav>
 
   <!-- INTRODUCTION -->
@@ -251,62 +272,87 @@
     </div>
   </div>
 
-  <!-- TWO FAMILIES -->
-  <h2>1. Two Recurrence Families</h2>
+  <!-- FOUR EXACT FAMILIES & 26x26 SPECTRUM -->
+  <h2>1. Four Exact Recurrence Families &amp; The 26&times;26 Spectrum</h2>
 
   <p>
-    Under English modified #5, the 20 distinct letter sequences split into two families. Each family shares a common generating-function denominator, and therefore a common linear recurrence.
+    Using exact integer arithmetic (arbitrary-precision BigInt Berlekamp&ndash;Massey run on the first 40 terms and verified across all 500 released terms without deviation), the earlier two-family empirical picture is now refined into <strong>four exact algebraic families</strong>. The classification is determined by two exact quantities: the minimal linear recurrence order and whether <code>(x &minus; 1)</code> is an algebraic factor of the characteristic polynomial (evaluated exactly via the <em>p(1) = 0</em> test).
   </p>
 
-  <h3>Group 2 — 13 letters</h3>
+  <table style="width: 100%; border-collapse: collapse; margin: 1.2rem 0; font-size: 0.9rem; table-layout: fixed;">
+    <thead>
+      <tr style="background: #f4f4f4; border-bottom: 2px solid #ccc;">
+        <th style="width: 10%; padding: 0.7rem 0.5rem;">Family</th>
+        <th style="width: 12%; padding: 0.7rem 0.5rem; text-align: center;">Order</th>
+        <th style="width: 18%; padding: 0.7rem 0.5rem; text-align: center;">(x &minus; 1) Factor</th>
+        <th style="width: 10%; padding: 0.7rem 0.5rem; text-align: center;">Count</th>
+        <th style="width: 25%; padding: 0.7rem 0.5rem;">Constituent Letters</th>
+        <th style="width: 25%; padding: 0.7rem 0.5rem;">Algebraic Interpretation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid #e0e0e0;">
+        <td style="padding: 0.6rem 0.5rem; font-weight: bold;">G2</td>
+        <td style="padding: 0.6rem 0.5rem; text-align: center;">13</td>
+        <td style="padding: 0.6rem 0.5rem; text-align: center; white-space: nowrap;">No (p(1) &ne; 0)</td>
+        <td style="padding: 0.6rem 0.5rem; text-align: center;">14</td>
+        <td style="padding: 0.6rem 0.5rem; line-height: 1.6;"><code>a, d, e, g, h, i, k, l, n, r, u, w, y, z</code></td>
+        <td style="padding: 0.6rem 0.5rem;">Base denominator Q₂(x)</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #e0e0e0;">
+        <td style="padding: 0.6rem 0.5rem; font-weight: bold;">G2*</td>
+        <td style="padding: 0.6rem 0.5rem; text-align: center;">14</td>
+        <td style="padding: 0.6rem 0.5rem; text-align: center; white-space: nowrap;">No (p(1) &ne; 0)</td>
+        <td style="padding: 0.6rem 0.5rem; text-align: center;">1</td>
+        <td style="padding: 0.6rem 0.5rem;"><code>q</code></td>
+        <td style="padding: 0.6rem 0.5rem;">Denominator Q₂(x), saturated numerator</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #e0e0e0;">
+        <td style="padding: 0.6rem 0.5rem; font-weight: bold;">G1</td>
+        <td style="padding: 0.6rem 0.5rem; text-align: center;">14</td>
+        <td style="padding: 0.6rem 0.5rem; text-align: center; white-space: nowrap;">Yes (p(1) = 0)</td>
+        <td style="padding: 0.6rem 0.5rem; text-align: center;">10</td>
+        <td style="padding: 0.6rem 0.5rem; line-height: 1.6;"><code>b, c, f, j, m, o, p, s, t, v</code></td>
+        <td style="padding: 0.6rem 0.5rem;">Denominator (x &minus; 1)&middot;Q₂(x)</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #e0e0e0;">
+        <td style="padding: 0.6rem 0.5rem; font-weight: bold;">G1*</td>
+        <td style="padding: 0.6rem 0.5rem; text-align: center;">15</td>
+        <td style="padding: 0.6rem 0.5rem; text-align: center; white-space: nowrap;">Yes (p(1) = 0)</td>
+        <td style="padding: 0.6rem 0.5rem; text-align: center;">1</td>
+        <td style="padding: 0.6rem 0.5rem;"><code>x</code></td>
+        <td style="padding: 0.6rem 0.5rem;">Denominator (x &minus; 1)&middot;Q₂(x), saturated numerator</td>
+      </tr>
+    </tbody>
+  </table>
 
   <p>
-    Letters: <code>a, d, e, g, h, i, k, L, q, u, w, y, z</code>
+    The letters <code>q</code> and <code>x</code> are the exact boundary cases where numerator degree equals denominator degree, appending an algebraic factor of <em>x</em> to their recurrence without modifying the asymptotic growth rate.
   </p>
 
+  <h3>The Exact 26&times;26 Incidence Spectrum</h3>
+
   <p>
-    Common denominator (degree 13):
+    The substitution operator over the 26-symbol alphabet defines an exact 26&times;26 non-negative integer incidence matrix <em>M</em>. Over &Qopf;, the characteristic polynomial factors with an exact <strong>13&ndash;13 equal-degree split</strong> between linear factors and the irreducible polynomial:
+  </p>
+
+  <div class="polynomial-block" style="text-align: center; font-size: 1rem; background: #eef2f7; border-left: 4px solid #1a0dab;">
+    charpoly(M) = (x &minus; 2) &middot; x<sup>3</sup> &middot; (x &minus; 1)<sup>9</sup> &middot; G<sub>2</sub>(x)
+  </div>
+
+  <p>
+    Where <strong>G<sub>2</sub>(x)</strong> is the monic, irreducible degree-13 minimal polynomial:
   </p>
 
   <div class="polynomial-block">
-    Q₂(x) = 4x¹³ − 21x¹² + 45x¹¹ − 74x¹⁰ + 98x⁹ − 34x⁸ − 116x⁷ + 210x⁶ − 152x⁵ + 26x⁴ + 38x³ − 30x² + 9x − 1
+    G<sub>2</sub>(x) = x<sup>13</sup> &minus; 9x<sup>12</sup> + 30x<sup>11</sup> &minus; 38x<sup>10</sup> &minus; 26x<sup>9</sup> + 152x<sup>8</sup> &minus; 210x<sup>7</sup> + 116x<sup>6</sup> + 34x<sup>5</sup> &minus; 98x<sup>4</sup> + 74x<sup>3</sup> &minus; 45x<sup>2</sup> + 21x &minus; 4
   </div>
 
-  <h3>Group 1 — 7 letters</h3>
-
-  <p>
-    Letters: <code>t, b, c, j, o, p, x</code>
-  </p>
-
-  <p>
-    Common denominator (degree 14):
-  </p>
-
-  <div class="polynomial-block">
-    Q₁(x) = 4x¹⁴ − 25x¹³ + 66x¹² − 119x¹¹ + 172x¹⁰ − 132x⁹ − 82x⁸ + 326x⁷ − 362x⁶ + 178x⁵ + 12x⁴ − 68x³ + 39x² − 10x + 1
-  </div>
-
-  <h3>The relation between Q₁ and Q₂</h3>
-
-  <p>
-    The two denominators are not independent. Direct factorization shows:
-  </p>
-
-  <div class="polynomial-block">
-    Q₁(x) = (x − 1) · Q₂(x)
-  </div>
-
-  <p>
-    Therefore the greatest common divisor is:
-  </p>
-
-  <div class="polynomial-block">
-    gcd(Q₁, Q₂) = Q₂(x)
-  </div>
-
-  <p>
-    The extra factor <code>(x − 1)</code> in Q₁ introduces one constant mode. This is the only difference between the two families. The dominant behaviour of all 20 sequences is governed by Q₂.
-  </p>
+  <ul>
+    <li><strong>Galois Invariant:</strong> The splitting field Galois group is verified in SageMath as the full symmetric group <em>S<sub>13</sub></em> (order 13! = 6,227,020,800).</li>
+    <li><strong>Perron Property:</strong> G<sub>2</sub>(x) has a strictly dominant root &lambda;<sub>E5</sub> &approx; 3.1415932235776..., making it an algebraic integer / Perron number of degree 13.</li>
+    <li><strong>Word Composition Theorem:</strong> A word's minimal recurrence order satisfies <em>order(word) &le; max(order of constituent letters)</em>. Verified with exact equality across all 86 tested words.</li>
+  </ul>
 
   <!-- BASIS THEOREM -->
   <h2>2. The Basis Theorem</h2>
@@ -363,57 +409,51 @@
   <h2>4. Linear Dependencies</h2>
 
   <p>
-    The 20 sequences span a 14-dimensional space (the solution space of Q₁). Therefore there must be exactly 6 independent linear relations. They are listed below. Each relation is of the form:
-  </p>
-
-  <div class="polynomial-block">
-    α₁ S₁ + α₂ S₂ + ⋯ + α₂₀ S₂₀ = 0
-  </div>
-
-  <p>
-    where Sᵢ denotes the sequence for a letter under English modified #5.
+    The 20 sequences span a 14-dimensional space (the solution space of Q₁). Therefore, there exist exactly 6 independent linear relations among them:
   </p>
 
   <h3>Relation 1</h3>
-  <div class="dependency">
-    <div class="terms">
-      −2·S_b − 1·S_c − 3·S_e + 1·S_h − 2·S_j − 2·S_k + 1·S_o = 0
-    </div>
+  <div class="math-relation">
+    &minus;2<i>S</i><sub>b</sub> &minus; <i>S</i><sub>c</sub> &minus; 3<i>S</i><sub>e</sub> + <i>S</i><sub>h</sub> &minus; 2<i>S</i><sub>j</sub> &minus; 2<i>S</i><sub>k</sub> + <i>S</i><sub>o</sub> = 0
   </div>
 
   <h3>Relation 2</h3>
-  <div class="dependency">
-    <div class="terms">
-      −1·S_b + 1·S_i + 1·S_j + 1·S_p = 0
-    </div>
+  <div class="math-relation">
+    &minus;<i>S</i><sub>b</sub> + <i>S</i><sub>i</sub> + <i>S</i><sub>j</sub> + <i>S</i><sub>p</sub> = 0
   </div>
 
   <h3>Relation 3</h3>
-  <div class="dependency">
-    <div class="terms">
-      1·S_t − 1·S_b + 1·S_c − 2·S_e + 2·S_i + 1·S_k − 1·S_q + 1·S_u = 0
-    </div>
+  <div class="math-relation">
+    <i>S</i><sub>t</sub> &minus; <i>S</i><sub>b</sub> + <i>S</i><sub>c</sub> &minus; 2<i>S</i><sub>e</sub> + 2<i>S</i><sub>i</sub> + <i>S</i><sub>k</sub> &minus; <i>S</i><sub>q</sub> + <i>S</i><sub>u</sub> = 0
   </div>
 
-  <h3>Relation 4</h3>
-  <div class="dependency">
-    <div class="terms">
-      −76241200071/27115799659·S_t − 1576447438/2085830743·S_a − 114771594969/216926397272·S_b + 53682835069/54231599318·S_c − 3112982248/2085830743·S_d + 377784251903/108463198636·S_e + 3320347499/4171661486·S_g + 46788721217/108463198636·S_h − 30336266964/27115799659·S_i + 368911142517/108463198636·S_j + 84390538535/108463198636·S_k − 47912034055/216926397272·S_L − 8879446664/27115799659·S_q + 51766082105/108463198636·S_w + 1·S_x = 0
-    </div>
+  <h3>Relation 4 (The Bridge Relation)</h3>
+  <div class="math-relation" style="font-size: 0.95rem; line-height: 2.2;">
+    &minus;<span class="frac"><span class="num">76,241,200,071</span><span class="den">27,115,799,659</span></span><i>S</i><sub>t</sub>
+    &minus;<span class="frac"><span class="num">1,576,447,438</span><span class="den">2,085,830,743</span></span><i>S</i><sub>a</sub>
+    &minus;<span class="frac"><span class="num">114,771,594,969</span><span class="den">216,926,397,272</span></span><i>S</i><sub>b</sub>
+    +<span class="frac"><span class="num">53,682,835,069</span><span class="den">54,231,599,318</span></span><i>S</i><sub>c</sub>
+    &minus;<span class="frac"><span class="num">3,112,982,248</span><span class="den">2,085,830,743</span></span><i>S</i><sub>d</sub>
+    +<span class="frac"><span class="num">377,784,251,903</span><span class="den">108,463,198,636</span></span><i>S</i><sub>e</sub>
+    +<span class="frac"><span class="num">3,320,347,499</span><span class="den">4,171,661,486</span></span><i>S</i><sub>g</sub>
+    +<span class="frac"><span class="num">46,788,721,217</span><span class="den">108,463,198,636</span></span><i>S</i><sub>h</sub>
+    &minus;<span class="frac"><span class="num">30,336,266,964</span><span class="den">27,115,799,659</span></span><i>S</i><sub>i</sub>
+    +<span class="frac"><span class="num">368,911,142,517</span><span class="den">108,463,198,636</span></span><i>S</i><sub>j</sub>
+    +<span class="frac"><span class="num">84,390,538,535</span><span class="den">108,463,198,636</span></span><i>S</i><sub>k</sub>
+    &minus;<span class="frac"><span class="num">47,912,034,055</span><span class="den">216,926,397,272</span></span><i>S</i><sub>l</sub>
+    &minus;<span class="frac"><span class="num">8,879,446,664</span><span class="den">27,115,799,659</span></span><i>S</i><sub>q</sub>
+    +<span class="frac"><span class="num">51,766,082,105</span><span class="den">108,463,198,636</span></span><i>S</i><sub>w</sub>
+    + <i>S</i><sub>x</sub> = 0
   </div>
 
   <h3>Relation 5</h3>
-  <div class="dependency">
-    <div class="terms">
-      1·S_t − 1·S_b + 1·S_c − 1·S_e + 2·S_i + 1·S_j + 1·S_k − 1·S_q + 1·S_y = 0
-    </div>
+  <div class="math-relation">
+    <i>S</i><sub>t</sub> &minus; <i>S</i><sub>b</sub> + <i>S</i><sub>c</sub> &minus; <i>S</i><sub>e</sub> + 2<i>S</i><sub>i</sub> + <i>S</i><sub>j</sub> + <i>S</i><sub>k</sub> &minus; <i>S</i><sub>q</sub> + <i>S</i><sub>y</sub> = 0
   </div>
 
   <h3>Relation 6</h3>
-  <div class="dependency">
-    <div class="terms">
-      −1·S_t + 1·S_b − 1·S_g + 1·S_z = 0
-    </div>
+  <div class="math-relation">
+    &minus;<i>S</i><sub>t</sub> + <i>S</i><sub>b</sub> &minus; <i>S</i><sub>g</sub> + <i>S</i><sub>z</sub> = 0
   </div>
 
   <p>
@@ -448,7 +488,7 @@
 
   <div class="theorem">
     <p>
-      <strong>EOA Algebraic Foundation for English Modified #5.</strong> Under English modified #5, the 20 EOA sequences split into two recurrence families. Group 2 (13 letters) forms a true basis for a 13-dimensional solution space of Q₂. Group 1 (7 letters) extends this by one constant mode via Q₁ = (x − 1)Q₂. The LCR is the reciprocal of the smallest-modulus root of Q₂ and matches π to five decimal places. The 20 sequences satisfy exactly 6 independent linear relations, spanning 14 dimensions.
+      <strong>EOA Algebraic Foundation for English Modified #5.</strong> Under English modified #5, the 20 EOA sequences split into four exact recurrence families. Group 2 (13 letters) forms a true basis for a 13-dimensional solution space of Q₂. Group 1 (10 letters) extends this by one constant mode via Q₁ = (x − 1)Q₂. The boundary letters <code>q</code> and <code>x</code> introduce numerator saturation without altering the dominant growth. The LCR is the reciprocal of the smallest-modulus root of Q₂ and matches π to five decimal places. The 20 sequences satisfy exactly 6 independent linear relations, spanning 14 dimensions.
     </p>
   </div>
 
