@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Global Sequence Census of 36 Writing Systems · Engineering of Alphabets (EOA)</title>
+
+  <meta name="description" content="A comprehensive census of integer sequences generated across 36 human writing systems under the EOA operator: 1,056 letters audited against the OEIS, yielding 402 distinct sequences, 6 classical mathematical families, and 346 uncatalogued sequences.">
+  <meta name="keywords" content="EOA, OEIS, integer sequences, census, alphabets, symbolic dynamics, Fibonacci bisection, powers of two, Pell sequence, silver ratio, golden ratio, 36 scripts, uncatalogued sequences">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://research.neurolabs.space/census.html">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #fcfcfc;
+      color: #1e1e1e;
+      line-height: 1.7;
+      padding: 2rem 1.5rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .header {
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: -0.5px;
+    }
+
+    .header .tagline {
+      font-size: 1rem;
+      color: #555;
+      margin-top: 0.2rem;
+    }
+
+    /* Navigation buttons */
+    .mainnav {
+      margin: 1rem 0 2rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      padding: 0.9rem 1rem;
+      background: #f4f4f4;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+    }
+
+    .mainnav a.navbtn {
+      display: inline-block;
+      padding: 0.55rem 1.1rem;
+      font-size: 0.92rem;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      color: #1e1e1e;
+      background: #fff;
+      border: 1px solid #c8c8c8;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+      transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+    }
+
+    .mainnav a.navbtn:hover {
+      background: #e8e8e8;
+      color: #1e1e1e;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.14);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    .mainnav a.navbtn.current,
+    .mainnav a.navbtn.current:hover {
+      background: #1e1e1e;
+      color: #ffffff;
+      border-color: #1e1e1e;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      font-weight: 600;
+      transform: none;
+      text-decoration: none;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-top: 2.2rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.4rem;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-top: 1.5rem;
+      color: #222;
+    }
+
+    p { margin: 0.8rem 0; }
+
+    ul { list-style: none; padding-left: 0; }
+    ul li { margin-bottom: 0.5rem; padding-left: 1.2rem; text-indent: -1.2rem; }
+    ul li::before { content: "• "; color: #777; }
+
+    a { color: #1a0dab; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.2rem 0;
+      font-size: 0.92rem;
+    }
+
+    th, td {
+      padding: 0.65rem 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      vertical-align: top;
+    }
+
+    th { background: #f0f0f0; font-weight: 600; }
+
+    .promise-box {
+      background: #f0f0f0;
+      padding: 1.2rem 1.5rem;
+      border-radius: 8px;
+      margin: 1.2rem 0;
+      border-left: 4px solid #1e1e1e;
+    }
+
+    .promise-box ul { margin-top: 0.5rem; }
+    .promise-box ul li::before { content: "✓ "; color: #1e1e1e; }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .stat-card {
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 1.2rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    }
+
+    .stat-card .num {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #1a0dab;
+      display: block;
+      line-height: 1.2;
+    }
+
+    .stat-card .lbl {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 0.3rem;
+    }
+
+    .footer {
+      margin-top: 2.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #ddd;
+      font-size: 0.85rem;
+      color: #666;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>Engineering of Alphabets (EOA)</h1>
+    <div class="tagline">Research Program · Neurolabs R&amp;D · Symbolic Dynamics &amp; Representation Theory</div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav class="mainnav">
+    <a href="index.html" class="navbtn">Home</a>
+    <a href="census.html" class="navbtn current">Sequence Census</a>
+    <a href="algebraic.html" class="navbtn">Algebraic Foundation</a>
+    <a href="visualizations.html" class="navbtn">Visualizations</a>
+    <a href="questions.html" class="navbtn">Open Questions</a>
+    <a href="visualizer/index.html" class="navbtn">Sequence Visualizer</a>
+  </nav>
+
+  <!-- TITLE & SUMMARY -->
+  <h2>The Alphabet as a Sequence Engine: A Global Census</h2>
+
+  <p>
+    What happens when human writing systems are treated not merely as cultural orthographies, but as deterministic discrete dynamical systems? 
+  </p>
+
+  <p>
+    In this global census, we evaluated the integer sequences generated across <strong>36 world writing systems</strong> (totaling <strong>1,056 individual letters</strong>) under the Engineering of Alphabets (EOA) recursive operator. Auditing every sequence to 500 terms in exact BigInt arithmetic against the <em>On-Line Encyclopedia of Integer Sequences</em> (OEIS) reveals that letter-name rules non-randomly isolate into exact algebraic invariants and classical sequences.
+  </p>
+
+  <!-- KEY STATS CARDS -->
+  <div class="stat-grid">
+    <div class="stat-card">
+      <span class="num">36</span>
+      <span class="lbl">Writing Systems Evaluated</span>
+    </div>
+    <div class="stat-card">
+      <span class="num">1,056</span>
+      <span class="lbl">Individual Letters Analyzed</span>
+    </div>
+    <div class="stat-card">
+      <span class="num">402</span>
+      <span class="lbl">Distinct Generated Sequences</span>
+    </div>
+    <div class="stat-card">
+      <span class="num" style="color: #b30000;">346</span>
+      <span class="lbl">Sequences Uncatalogued in OEIS</span>
+    </div>
+  </div>
+
+  <!-- THE CROWN JEWELS -->
+  <h2>1. The Crown Jewels: Six Verified Mathematical Families</h2>
+
+  <p>
+    Matches in this census are not loose prefix agreements; they are exact term-for-term identities certified across the full published OEIS record (up to 90 terms) under integer linear recurrences:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Family / Name</th>
+        <th>OEIS Record</th>
+        <th>Recurrence / Definition</th>
+        <th>Growth (&lambda;)</th>
+        <th>Attested Scripts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Powers of Two</strong></td>
+        <td><a href="https://oeis.org/A000079" target="_blank">A000079</a></td>
+        <td>a(n) = 2<sup>n</sup></td>
+        <td>2.000000</td>
+        <td>Hebrew, Phoenician, Aramaic, Syriac, Arabic, Latin-Japanese, Sanskrit, Amharic</td>
+      </tr>
+      <tr>
+        <td><strong>Fibonacci Bisection</strong></td>
+        <td><a href="https://oeis.org/A001906" target="_blank">A001906</a></td>
+        <td>t(n+2) = 3t(n+1) &minus; t(n)</td>
+        <td>&phi;&sup2; &approx; 2.618034</td>
+        <td>Ge'ez, Thai</td>
+      </tr>
+      <tr>
+        <td><strong>Odd Fibonacci Numbers</strong></td>
+        <td><a href="https://oeis.org/A001519" target="_blank">A001519</a></td>
+        <td>t(n+2) = 3t(n+1) &minus; t(n)</td>
+        <td>&phi;&sup2; &approx; 2.618034</td>
+        <td>Ge'ez, Thai</td>
+      </tr>
+      <tr>
+        <td><strong>Odd-Index Lucas Numbers</strong></td>
+        <td><a href="https://oeis.org/A002878" target="_blank">A002878</a></td>
+        <td>t(n+2) = 3t(n+1) &minus; t(n)</td>
+        <td>&phi;&sup2; &approx; 2.618034</td>
+        <td>Thai</td>
+      </tr>
+      <tr>
+        <td><strong>Pell Family (Silver Ratio)</strong></td>
+        <td><a href="https://oeis.org/A048739" target="_blank">A048739</a>, <a href="https://oeis.org/A094723" target="_blank">A094723</a></td>
+        <td>Silver ratio companions</td>
+        <td>1 + &radic;2 &approx; 2.414214</td>
+        <td>Arabic</td>
+      </tr>
+      <tr>
+        <td><strong>Mersenne Numbers</strong></td>
+        <td><a href="https://oeis.org/A000225" target="_blank">A000225</a></td>
+        <td>a(n) = 2<sup>n</sup> &minus; 1</td>
+        <td>2.000000</td>
+        <td>Japanese-Latin, Aramaic, Sanskrit, Amharic, Armenian</td>
+      </tr>
+      <tr>
+        <td><strong>Silver-Square Recurrence</strong></td>
+        <td><a href="https://oeis.org/A007070" target="_blank">A007070</a></td>
+        <td>t(n+2) = 6t(n+1) &minus; 4t(n)</td>
+        <td>2 + &radic;2 &approx; 3.414214</td>
+        <td>Burmese</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- STATISTICAL CONTROLS -->
+  <h2>2. Statistical Controls and Null Models</h2>
+
+  <div class="promise-box" style="border-left-color: #0056b3; background: #f4f8fb;">
+    <p><strong>Proof Against Random Coincidence</strong></p>
+    <ul>
+      <li><strong>The Small-Core Anomaly (0 of 250):</strong> Real writing systems isolate their growth into tiny recurrent hubs (2 to 4 letters). Across 250 matched random-alphabet simulations (2&ndash;5 letters per name), every single random alphabet became entangled in a giant loop (core sizes 21 to 26). None fell below 21.</li>
+      <li><strong>Multi-Lineage Universality (p = 0.009):</strong> The golden ratio squared (&phi;&sup2;) recurs across three historically independent writing traditions: Semitic (Hebrew, Phoenician, Ge'ez), Brahmic (Thai), and Japonic (Japanese-Latin). Against an exhaustive universe of 4,482 non-negative 3&times;3 candidate hub matrices, this cross-lineage recurrence is statistically significant at <em>p = 0.009</em> (1 in 110).</li>
+      <li><strong>The English E5 Spectral Split (0 of 100):</strong> The 26&times;26 English E5 matrix factors into 13 linear factors and one irreducible polynomial of degree 13. Zero of 100 matched random matrices produced an equal-degree split.</li>
+    </ul>
+  </div>
+
+  <!-- THE 346 UNCATALOGUED SEQUENCES -->
+  <h2>3. The Uncatalogued 346 Sequences</h2>
+
+  <p>
+    While 56 sequences correspond to known mathematical sequences, <strong>346 distinct generated sequences appear in no existing mathematical catalogue</strong>.
+  </p>
+
+  <p>
+    Each of these 346 sequences satisfies an explicit integer linear recurrence derived from its script's incidence matrix. They concentrate primarily in the large-core scripts (English E5, Greek, Gothic, Runic, Ogham, Glagolitic). Every sequence, its initial conditions, its recurrence coefficients, and its script attestation are released as open data in <code>uncatalogued_sequences.csv</code> for independent community analysis.
+  </p>
+
+  <!-- DATA & VERIFICATION SUITE -->
+  <h2>4. Data Availability &amp; Verification Suite</h2>
+
+  <p>
+    All census tables, matrices, and audit scripts are open-access and reproducible in exact integer arithmetic:
+  </p>
+
+  <ul>
+    <li>📦 <strong>Census Dataset (Zenodo):</strong> <a href="https://doi.org/10.5281/zenodo.23858517" target="_blank">DOI: 10.5281/zenodo.23858517</a></li>
+    <li>📂 <strong>GitHub Repository (eoa-oeis):</strong> <a href="https://github.com/bahaa-budargham/eoa-oeis" target="_blank">github.com/bahaa-budargham/eoa-oeis</a></li>
+    <li>📊 <strong>36 Script Incidence Matrices (Zenodo):</strong> <a href="https://doi.org/10.5281/zenodo.23440579" target="_blank">DOI: 10.5281/zenodo.23440579</a></li>
+    <li>📄 <strong>Main Technical Paper (Zenodo):</strong> <a href="https://doi.org/10.5281/zenodo.23449728" target="_blank">DOI: 10.5281/zenodo.23449728</a></li>
+  </ul>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>
+      <a href="https://www.neurolabs.space">Neurolabs Inc.</a> · Montreal, Canada<br>
+      <span style="font-size: 0.8rem;">© 2026 Bahaa Budargham. All rights reserved.</span>
+    </p>
+  </div>
+
+</body>
+</html>
